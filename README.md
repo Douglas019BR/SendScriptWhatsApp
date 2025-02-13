@@ -16,7 +16,7 @@ No WhatsApp Web abra o console do Browser
 
 |  ⚠️ Aviso importante, numa atualização recente do Google Chrome, está sendo impedido que qualquer script seja colado no Console.|
 |--|
-|  ***Para contornar esse problema, o console do desenvolvedor espera receber um confirmação textual escrevendo no console: "allow-scripts"***| 
+|  ***Para contornar esse problema, o console do desenvolvedor espera receber um confirmação textual escrevendo no console: "allow pasting"***| 
 |Após isso será permitido colar e continuar a execução do script|
 
 
