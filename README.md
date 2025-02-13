@@ -1,6 +1,7 @@
 # SendScriptWhatsApp
 
-Código para enviar um Script maneiro para seus amigos ou grupos do WhatsApp
+Código para enviar um Script maneiro para seus amigos ou grupos do WhatsApp.
+A ideia é manter um repositório Open Source onde todos possam contribuir para fazermos uma gigantesca coleção de scripts possíveis de serem enviadas pelo Whatsapp para nossos amigos.
 
 ## Utilização
 
@@ -8,8 +9,10 @@ Abra qualquer arquivo do diretório `scripts`
 
 Copie todo o conteúdo (clique em raw -> ctrl+a -> ctrl+c)
 
-ctrl+a = selecionar tudo
-ctrl+c = copiar
+
+ **Atalhos:**
+   - `Ctrl+A` = selecionar tudo
+   - `Ctrl+C` = copiar
 
 No WhatsApp Web, na conversa desejada, abra o console do Browser (F12 se usar chrome, chromium, brave e derivados)
 
@@ -22,3 +25,13 @@ No WhatsApp Web, na conversa desejada, abra o console do Browser (F12 se usar ch
 Cole o código no console e aperte Enter
 
 Pronto, veja a mágica acontecer
+
+
+## Instalação
+
+Para utilizar o SendScriptWhatsApp, você não precisa de nenhuma instalação adicional. Basta clonar este repositório e acessar os scripts desejados.
+
+
+## Contribuição
+
+Leia o arquivo [`CONTRIBUTING.MD`](https://github.com/Douglas019BR/SendScriptWhatsApp/blob/main/CONTRIBUTING.md)
