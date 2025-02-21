@@ -21,7 +21,6 @@ async function enviarScript(scriptText){
 	
 	return lines.length;
 }
-
 enviarScript(`
 
 El gaucho Martín Fierro
