@@ -1,16 +1,20 @@
 # SendScriptWhatsApp
 
-Código para enviar o Script inteiro de Shrek ou Bee Movie para seus amigos ou grupos do WhatsApp
+Código para enviar um Script maneiro para seus amigos ou grupos do WhatsApp.
+A ideia é manter um repositório Open Source onde todos possam contribuir para fazermos uma gigantesca coleção de scripts possíveis de serem enviadas pelo Whatsapp para nossos amigos.
 
 ## Utilização
 
-Abra [shrekSendScript.js](https://github.com/Matt-Fontes/SendScriptWhatsApp/blob/main/shrekSendScript.js)
-Ou
-Abra [beeMovieSendScript.js](https://github.com/Matt-Fontes/SendScriptWhatsApp/blob/main/beeMovieSendScript.js)
+Abra qualquer arquivo do diretório `scripts`
 
 Copie todo o conteúdo (clique em raw -> ctrl+a -> ctrl+c)
 
-No WhatsApp Web abra o console do Browser
+
+ **Atalhos:**
+   - `Ctrl+A` = selecionar tudo
+   - `Ctrl+C` = copiar
+
+No WhatsApp Web, na conversa desejada, abra o console do Browser (F12 se usar chrome, chromium, brave e derivados)
 
 |  ⚠️ Aviso importante, numa atualização recente do Google Chrome, está sendo impedido que qualquer script seja colado no Console.|
 |--|
@@ -20,13 +24,16 @@ No WhatsApp Web abra o console do Browser
 
 Cole o código no console e aperte Enter
 
-Pronto
+Pronto, veja a mágica acontecer
 
-## Plugin
+## Instalação
+
+Para utilizar o SendScriptWhatsApp, você não precisa de nenhuma instalação adicional. Basta clonar este repositório e acessar os scripts desejados.
+
+
+## Plugin navegador
 
 A extensão habilita um novo botão no seu whats web o abrir o chat que deseja enviar e clicar.
-
-![imagem plugin no whats](./extension/imagem/print_whatsapp.png)
 
 Para ultilizar a extensão siga os seguintes passos:
 
@@ -41,3 +48,7 @@ Para ultilizar a extensão siga os seguintes passos:
 ![Carregar sem compactação](./extension/imagem/csc.png)
 
 Pronto. Divirta-se 
+
+## Contribuição
+
+Leia o arquivo [`CONTRIBUTING.MD`](https://github.com/Douglas019BR/SendScriptWhatsApp/blob/main/CONTRIBUTING.md)
