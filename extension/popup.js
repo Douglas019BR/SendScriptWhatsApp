@@ -5,10 +5,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     roteiroSelect.onchange = () => previewRoteiro();
 
-
-    async function previewRoteiro() {
+    async function textScript() {
         const roteiroSelecionado = roteiroSelect.value;
         const roteiro = await getRoadmapInFile(roteiroSelecionado);
+
+        return roteiro
+    }
+    
+    async function previewRoteiro() {
+        const roteiro = await textScript();
+
         const lines = roteiro.slice(0, 200).split("\n");
         const previewText = lines.map((line, index) => `${index + 1}. ${line}`).join("\n");
 
@@ -25,28 +31,14 @@ document.addEventListener('DOMContentLoaded', function() {
             option.textContent = roteiro.replace('_', ' ').toUpperCase();
             roteiroSelect.appendChild(option);
         });
-
-        Object.assign(roadmap, roteirosData);
     }
 
-    // Função para enviar o roteiro
-    function enviarRoteiro() {
-        const roteiroSelecionado = roteiroSelect.value;
-        if (!roteiroSelecionado) {
-            alert('Por favor, selecione um roteiro');
-            return;
-        }
 
-        // Enviar mensagem para o content script
-        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            chrome.tabs.sendMessage(tabs[0].id, {
-                action: 'enviarRoteiro',
-                roteiro: roadmap[roteiroSelecionado]
-            });
-        });
+    async function enviarRoteiro() {
+        const text = await textScript();
+        send(text)
     }
 
-    // Carregar roteiros quando a popup abrir
     carregarRoteiros();
 
     // Adicionar evento de clique no botão

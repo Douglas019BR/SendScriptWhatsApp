@@ -1,27 +1,20 @@
-function send(scriptText) {
+function send(scriptText, options=Configuration) {
     window.InputEvent = window.Event || window.InputEvent;
-    const event = new InputEvent('input', { bubbles: true });
-    const TIME_SEND = 500
-    const CONFIG_SELECTOR = {
-        header_button: "[role='button']._24-Ff",
-        textbox: "#main div._13NKt",
-        button_send: "#main span[data-testid=send]",
-        participant_container: "div._3uIPm.WYyr1",
-    }
+    const TIME_SEND = options.delaySend
+    
     const VIEW_ELEMENTS = {
-        header: document.querySelector(CONFIG_SELECTOR["header_button"]),
-        textbox:  document.querySelector(CONFIG_SELECTOR["textbox"]),
+        textbox:  document.querySelector(options.textareaSelector),
         button_send: () => {
-            return document.querySelector(CONFIG_SELECTOR["button_send"])
-        },
-        participant_container: () => {
-            return document.querySelector(CONFIG_SELECTOR["participant_container"])
+            return document.querySelector(options.sendButtonSelector)
         }
     }
 
     function sendMessage (messagem) {
+        const event = new InputEvent('input', { bubbles: true });
+
         VIEW_ELEMENTS['textbox'].textContent = messagem;
         VIEW_ELEMENTS['textbox'].dispatchEvent(event);
+
         const buttton_send = VIEW_ELEMENTS['button_send']();
         buttton_send.click();
     }
@@ -29,6 +22,7 @@ function send(scriptText) {
     const lines = scriptText.split("\n");
     let  i = 0;
     const id = setInterval(frame, TIME_SEND);
+
     function frame () {
         if (i >= lines.length) {
             clearInterval(id);
