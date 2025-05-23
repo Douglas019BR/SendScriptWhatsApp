@@ -5,24 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     roteiroSelect.onchange = () => previewRoteiro();
 
-    async function lerArquivosData() {
-        try {
-            const response = await fetch('http://localhost:5500/extension/data/bee_movie.txt');
-            const texto = await response.text();
-            return {
-                'bee_movie': texto,
-                'shrek': texto
-            };
-        } catch (error) {
-            console.error('Erro ao ler arquivos:', error);
-            return {};
-        }
-    }
 
-    function previewRoteiro() {
+    async function previewRoteiro() {
         const roteiroSelecionado = roteiroSelect.value;
-        console.log(roteiroSelecionado);
-        const roteiro = roadmap[roteiroSelecionado];
+        const roteiro = await getRoadmapInFile(roteiroSelecionado);
         const lines = roteiro.slice(0, 200).split("\n");
         const previewText = lines.map((line, index) => `${index + 1}. ${line}`).join("\n");
 
@@ -31,21 +17,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Função para carregar os roteiros no select
     async function carregarRoteiros() {
-        // Carregar roteiros da pasta data
-        const roteirosData = await lerArquivosData();
-        
-        // Limpar o select
         roteiroSelect.innerHTML = '';
         
-        // Adicionar os roteiros do data
-        Object.keys(roteirosData).forEach((roteiro) => {
+        Object.keys(roadmap).forEach((roteiro) => {
             const option = document.createElement('option');
             option.value = roteiro;
             option.textContent = roteiro.replace('_', ' ').toUpperCase();
             roteiroSelect.appendChild(option);
         });
 
-        // Atualizar o objeto roadmap com os novos roteiros
         Object.assign(roadmap, roteirosData);
     }
 
