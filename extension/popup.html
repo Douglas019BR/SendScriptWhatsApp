@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Enviador de Roteiros WhatsApp</title>
+    <style>
+        body {
+            width: 300px;
+            padding: 15px;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        button {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        button:hover {
+            background-color: #128C7E;
+        }
+        select {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Enviador de Roteiros</h2>
+        <select id="roteiroSelect">
+            <option value="">Selecione um roteiro</option>
+        </select>
+        <button id="enviarBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="white">
+                <path fill="currentColor" d="M1.101 21.757L23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z"></path>
+            </svg>
+            Enviar Roteiro
+        </button>
+        <div class="preview" style="max-height: 200px; overflow-y: auto;">
+            <p>Selecione um roteiro para ver a prévia</p>
+        </div>
+    </div>
+    <script src="config.js"></script>
+    <script src="roadmap.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html> 
