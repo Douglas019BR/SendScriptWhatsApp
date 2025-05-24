@@ -1,5 +1,5 @@
 window.addEventListener('load', function() {
-
+    console.log("Extension loaded...")
 });
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {    
@@ -13,10 +13,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             
             const VIEW_ELEMENTS = {
                 textbox: () => {
-                    return document.querySelector("#main div[contenteditable='true']");
+                    return document.querySelector(options.textareaSelector);
                 },
                 button_send: () => {
-                    return document.querySelector('[aria-label="Enviar"]');
+                    return document.querySelector(options.sendButtonSelector);
                 }
             };
 

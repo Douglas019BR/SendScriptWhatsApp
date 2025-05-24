@@ -36,7 +36,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function enviarRoteiro() {
         const text = await textScript();
-        send(text)
+        const response = await send(text)
+
+        console.log("[Send script] - ", response)
     }
 
     carregarRoteiros();
