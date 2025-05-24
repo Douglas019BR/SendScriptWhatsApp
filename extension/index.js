@@ -1,52 +1,69 @@
+window.addEventListener('load', function() {
+    console.log("Extension loaded...")
+});
 
-function load () {
-    return new Promise((resolve) => {
-        const fr = setInterval(() => {
-            console.log("Buscando...")
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {    
+    if (request.action === "sendMessages") {
+        const scriptText = request.scriptText;
+        const options = request.options;
+        
+        try {
+            window.InputEvent = window.Event || window.InputEvent;
+            const TIME_SEND = options.delaySend || 1000;
+            
+            const VIEW_ELEMENTS = {
+                textbox: () => {
+                    return document.querySelector(options.textareaSelector);
+                },
+                button_send: () => {
+                    return document.querySelector(options.sendButtonSelector);
+                }
+            };
 
-            const navActions = document.querySelector("div._3HQNh._1un-p")
-            if (navActions) {
-                clearInterval(fr)
-                // console.log("ACHO..")
-                // console.log('minha extensao.......',navActions)
-                resolve(true)
+            function sendMessage(messagem) {
+                const textarea = VIEW_ELEMENTS['textbox']();
+
+                if (!textarea) {
+                    throw new Error("Elementos textarea do WhatsApp não encontrados");
+                }
+
+                textarea.focus();
+                document.execCommand('insertText', false, messagem);
+                textarea.dispatchEvent(new Event('change', {bubbles: true}));
+
+                setTimeout(()=>{
+                    const buttton_send = VIEW_ELEMENTS['button_send']();
+                    
+                    if (!buttton_send) {
+                        throw new Error("Elementos buttton_send do WhatsApp não encontrados");
+                    }
+
+                    buttton_send.click();
+                }, 100)
+                
             }
 
-        },500)
-    })
-}
+            const lines = scriptText.split("\n");
+            let i = 0;
+            const id = setInterval(frame, TIME_SEND);
 
-function getRoadmap () {
-    const objMovies = {}
-    const movies = Object.keys(roadmap)
+            function frame() {
+                if (i >= lines.length) {
+                    clearInterval(id);
+                    sendResponse({ status: "success", message: "Mensagens enviadas com sucesso" });
+                    return;
+                }
 
-    let str = "Qual roteiro deseja deseja enviar ?\n"
-    let i = 1;
-    for (const movie of movies) {
-        str += i +" - "+ movie +"\n"
-        objMovies[i] = movie
-        i++;
+                const line = lines[i];
+                if(line.trim() != '') {
+                    sendMessage(line);
+                }
+
+                i++;
+            }
+        } catch (error) {
+            sendResponse({ status: "error", message: error.message });
+        }
     }
-    const op = prompt(str)
-    return roadmap[objMovies[op]]
-}
-
-function start() {
-    console.log('Start..')
-    const header = document.querySelector("._1QVfy._3UaCz")
-    const btn = document.createElement("button")
-
-    btn.id = "buttonSend"
-    btn.innerHTML = `<svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="gray"><path fill="currentColor" d="M1.101 21.757L23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z"></path></svg>`
-
-    btn.addEventListener('click',() => {
-        const roadmap = getRoadmap()
-        send(roadmap)
-    })
-    header.appendChild(btn)
-}
-
-load().then(start)
-
-
-
+    return true; // Mantém a conexão aberta para respostas assíncronas
+}); 

@@ -1,6 +1,0 @@
-#div_select {
-    visibility: hidden;
-}
-#div_select.open {
-    visibility: visible;
-}
