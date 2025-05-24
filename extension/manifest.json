@@ -6,10 +6,10 @@
   "permissions": [
     "activeTab",
     "scripting",
-    "fileSystem"
+    "tabs"
   ],
   "host_permissions": [
-    "file:///*"
+    "https://web.whatsapp.com/*"
   ],
   "web_accessible_resources": [{
     "resources": ["data/*"],
@@ -26,7 +26,8 @@
   "content_scripts": [
     {
       "matches": ["https://web.whatsapp.com/*"],
-      "js": ["index.js"]
+      "js": ["index.js"],
+      "run_at": "document_end"
     }
   ],
   "icons": {

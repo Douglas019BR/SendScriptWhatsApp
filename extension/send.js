@@ -1,38 +1,28 @@
 function send(scriptText, options=Configuration) {
-    window.InputEvent = window.Event || window.InputEvent;
-    const TIME_SEND = options.delaySend
-    
-    const VIEW_ELEMENTS = {
-        textbox:  document.querySelector(options.textareaSelector),
-        button_send: () => {
-            return document.querySelector(options.sendButtonSelector)
-        }
-    }
+    return new Promise((resolve, reject) => {
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            if (!tabs[0]) {
+                reject(new Error("Nenhuma aba ativa encontrada"));
+                return;
+            }
 
-    function sendMessage (messagem) {
-        const event = new InputEvent('input', { bubbles: true });
+            chrome.tabs.sendMessage(tabs[0].id, {
+                action: "sendMessages",
+                scriptText: scriptText,
+                options: options
+            }, function(response) {
+                if (chrome.runtime.lastError) {
+                    reject(new Error("Erro ao enviar mensagem: " + chrome.runtime.lastError.message));
+                    return;
+                }
 
-        VIEW_ELEMENTS['textbox'].textContent = messagem;
-        VIEW_ELEMENTS['textbox'].dispatchEvent(event);
+                if (response && response.status === "error") {
+                    reject(new Error(response.message));
+                    return;
+                }
 
-        const buttton_send = VIEW_ELEMENTS['button_send']();
-        buttton_send.click();
-    }
-
-    const lines = scriptText.split("\n");
-    let  i = 0;
-    const id = setInterval(frame, TIME_SEND);
-
-    function frame () {
-        if (i >= lines.length) {
-            clearInterval(id);
-        }
-
-        const line = lines[i];
-        if(line.trim() != '') {
-            sendMessage(line);
-        }
-
-        i++;
-    }
+                resolve(response);
+            });
+        });
+    });
 }
