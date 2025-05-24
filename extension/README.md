@@ -69,11 +69,11 @@ Gostaria de apresentar nossos serviços...
 ├── data/           # Pasta com os roteiros
 ├── icons/          # Ícones da extensão
 ├── imagem/         # Imagens utilizadas
+├── js/         # Demais scritps
 ├── manifest.json   # Configuração da extensão
 ├── popup.html      # Interface do usuário
 ├── popup.js        # Lógica da interface
-├── index.js        # Script principal
-└── send.js         # Funções de envio
+└── index.js        # Script principal
 ```
 
 ## ⚠️ Requisitos
