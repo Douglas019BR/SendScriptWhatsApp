@@ -1,20 +1,39 @@
 async function enviarScript(scriptText){
 	const lines = scriptText.split(/[\n\t]+/).map(line => line.trim()).filter(line => line);
-	main = document.querySelector("#main"),
-	textarea = main.querySelector(`div[contenteditable="true"]`)
+	const main = document.querySelector("#main") || document.querySelector('[data-testid="conversation-panel-body"]');
+	const textarea = main.querySelector(`div[contenteditable="true"]`) || 
+					 main.querySelector('[data-testid="message-composer"]') ||
+					 main.querySelector('[role="textbox"]') ||
+					 main.querySelector('div[spellcheck="true"]');
 	
 	if(!textarea) throw new Error("Não há uma conversa aberta")
 	
 	for(const line of lines){
-		console.log(line)
-	
 		textarea.focus();
-		document.execCommand('insertText', false, line);
-		textarea.dispatchEvent(new Event('change', {bubbles: true}));
+		textarea.innerHTML = '';
+		textarea.innerHTML = line;
+		
+		textarea.dispatchEvent(new InputEvent('input', {
+			bubbles: true,
+			cancelable: true,
+			inputType: 'insertText',
+			data: line
+		}));
+
+		await new Promise(resolve => setTimeout(resolve, 50));
 	
-		setTimeout(() => {
-			(main.querySelector(`[data-testid="send"]`) || main.querySelector(`[data-icon="send"]`)).click();
-		}, 100);
+		const sendButton = main.querySelector(`[data-testid="send"]`) || 
+						   main.querySelector(`[data-icon="send"]`) ||
+						   main.querySelector('button[aria-label*="Send"]') ||
+						   main.querySelector('span[data-icon="send"]').parentElement;
+		
+		if(sendButton) {
+			setTimeout(() => {
+				sendButton.click();
+			}, 100);
+		} else {
+			console.warn("Send button not found for line:", line);
+		}
 		
 		if(lines.indexOf(line) !== lines.length - 1) await new Promise(resolve => setTimeout(resolve, 250));
 	}
