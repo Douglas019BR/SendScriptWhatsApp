@@ -49,7 +49,12 @@ A extensão inclui diversos roteiros:
 
 ## ⚙️ Configurações
 
-A extensão funciona automaticamente, mas você pode:
+A extensão funciona automaticamente e suporta:
+- ✅ **WhatsApp em Português** e **Inglês**
+- ✅ Diferentes versões do WhatsApp Web
+- ✅ Múltiplos seletores para maior compatibilidade
+
+Você pode:
 - Escolher diferentes roteiros
 - Ver prévia antes de enviar
 - Cancelar o envio fechando a aba
@@ -70,6 +75,29 @@ A extensão funciona automaticamente, mas você pode:
 - Aguarde alguns segundos entre os envios
 - Verifique sua conexão com a internet
 - Certifique-se de que o WhatsApp não está com problemas
+
+### 🐛 Como Debugar a Extensão
+Se a extensão não estiver funcionando:
+
+1. **Abra o Console do Desenvolvedor**:
+   - Pressione `F12` no WhatsApp Web
+   - Vá na aba "Console"
+
+2. **Procure por mensagens da extensão**:
+   - Deve aparecer "Extension loaded..." quando carregar
+   - Durante o envio, verá logs como "Sending line 1: ..."
+
+3. **Verifique erros**:
+   - Mensagens em vermelho indicam problemas
+   - Copie os erros para reportar issues
+
+4. **Teste elementos manualmente**:
+   ```javascript
+   // Cole no console para testar se encontra os elementos
+   console.log("Main:", document.querySelector("#main"));
+   console.log("Textarea:", document.querySelector("div[contenteditable='true']"));
+   console.log("Send button:", document.querySelector("[data-testid='send']"));
+   ```
 
 ## ⚠️ Avisos Importantes
 
