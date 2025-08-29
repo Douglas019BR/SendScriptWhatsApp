@@ -1,92 +1,111 @@
-# Enviador de Roteiros WhatsApp
+# Extensão do Navegador - SendScriptWhatsApp
 
-Uma extensão para Chrome que permite enviar roteiros automaticamente no WhatsApp Web.
+A forma mais fácil de enviar roteiros no WhatsApp! Com interface amigável e sem complicações.
 
-## 🚀 Funcionalidades
+## 🎯 Como Instalar
 
-- Envio automático de roteiros no WhatsApp Web
-- Interface amigável e intuitiva
-- Suporte a múltiplos roteiros
-- Fácil configuração e personalização
+### 1. Baixar a Extensão
+- Baixe ou clone este repositório
+- Localize a pasta `extension`
 
-## 📦 Instalação
+### 2. Instalar no Chrome
+1. Abra o Chrome e vá em `chrome://extensions/`
+2. Ative o "Modo do desenvolvedor" (canto superior direito)
+3. Clique em "Carregar sem compactação"
+4. Selecione a pasta `extension`
+5. A extensão aparecerá na barra de ferramentas
 
-1. Clone este repositório:
-```bash
-git clone https://github.com/Dayanfreitas/SendScriptWhatsApp.git
-```
+![Extensão Instalada](./imagem/instaled.jpg)
 
-2. Abra o Chrome e vá para `chrome://extensions/`
-3. Ative o "Modo do desenvolvedor" no canto superior direito
-4. Clique em "Carregar sem compactação"
-5. Selecione esta pasta `extension` do projeto
-6. Pronto, instalado!
+## 🚀 Como Usar
 
-![instaled](./imagem/instaled.jpg)
+### Passo a Passo
+1. **Abra o WhatsApp Web** em `web.whatsapp.com`
+2. **Entre em uma conversa** (individual ou grupo)
+3. **Clique no ícone da extensão** na barra de ferramentas
+4. **Escolha um roteiro** no menu suspenso
+5. **Veja a prévia** do conteúdo que será enviado
+6. **Clique em "Enviar Roteiro"**
+7. **Aguarde** o envio automático das mensagens
 
-## 🛠️ Como Configurar Roteiros
+![Como Usar](./imagem/send_scritps.jpg)
 
-Para contribuir com novos roteiros, siga estes passos:
+### Dicas de Uso
+- ✅ Certifique-se de estar em uma conversa ativa
+- ✅ Não feche a aba durante o envio
+- ✅ Teste primeiro com roteiros curtos
+- ✅ Use em conversas onde todos concordem com a brincadeira
 
-1. Acesse a pasta `data/`
-2. Crie um novo arquivo com extensão `.txt`
-3. Escreva seu roteiro seguindo o formato:
-```
-Título do Roteiro
+## 📋 Roteiros Disponíveis
+
+A extensão inclui diversos roteiros:
+
+- **Filmes Clássicos**: Shrek, Bee Movie, Terminator 2
+- **Ação**: Velozes e Furiosos 2, Como Treinar seu Dragão
+- **Músicas**: Adele - Hello, Vida Loka
+- **Esportes**: Hino do Grêmio
+- **Games**: Super Mario Bros
+- **Literatura**: Martin Fierro
+
+## ⚙️ Configurações
+
+A extensão funciona automaticamente e suporta:
+- ✅ **WhatsApp em Português** e **Inglês**
+- ✅ Diferentes versões do WhatsApp Web
+- ✅ Múltiplos seletores para maior compatibilidade
+
+Você pode:
+- Escolher diferentes roteiros
+- Ver prévia antes de enviar
+- Cancelar o envio fechando a aba
+
+## 🔧 Solução de Problemas
+
+### Extensão não aparece?
+- Verifique se o modo desenvolvedor está ativo
+- Recarregue a página de extensões
+- Reinstale a extensão
+
+### Não está enviando mensagens?
+- Confirme que está em uma conversa ativa
+- Verifique se o WhatsApp Web está funcionando
+- Tente recarregar a página do WhatsApp
+
+### Mensagens não aparecem?
+- Aguarde alguns segundos entre os envios
+- Verifique sua conexão com a internet
+- Certifique-se de que o WhatsApp não está com problemas
+
+### 🐛 Como Debugar a Extensão
+Se a extensão não estiver funcionando:
+
+1. **Abra o Console do Desenvolvedor**:
+   - Pressione `F12` no WhatsApp Web
+   - Vá na aba "Console"
+
+2. **Procure por mensagens da extensão**:
+   - Deve aparecer "Extension loaded..." quando carregar
+   - Durante o envio, verá logs como "Sending line 1: ..."
+
+3. **Verifique erros**:
+   - Mensagens em vermelho indicam problemas
+   - Copie os erros para reportar issues
+
+4. **Teste elementos manualmente**:
+   ```javascript
+   // Cole no console para testar se encontra os elementos
+   console.log("Main:", document.querySelector("#main"));
+   console.log("Textarea:", document.querySelector("div[contenteditable='true']"));
+   console.log("Send button:", document.querySelector("[data-testid='send']"));
+   ```
+
+## ⚠️ Avisos Importantes
+
+- **Use com moderação**: Roteiros longos podem incomodar
+- **Respeite os outros**: Nem todos gostam de spam
+- **Teste primeiro**: Use em conversas próprias antes
+- **Seja responsável**: O uso inadequado pode resultar em bloqueios
+
 ---
-Mensagem 1
----
-Mensagem 2
----
-Mensagem 3
-```
 
-Cada mensagem será enviada separadamente, com uma pequena pausa entre elas.
-
-### Exemplo de Roteiro:
-```
-Apresentação Inicial
----
-Olá! Tudo bem?
----
-Me chamo [Seu Nome] e sou especialista em [Sua Área]
----
-Gostaria de apresentar nossos serviços...
-```
-
-## 🤝 Como Contribuir
-
-1. Faça um Fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
-## 📝 Estrutura do Projeto
-
-```
-./
-├── data/           # Pasta com os roteiros
-├── icons/          # Ícones da extensão
-├── imagem/         # Imagens utilizadas
-├── js/         # Demais scritps
-├── manifest.json   # Configuração da extensão
-├── popup.html      # Interface do usuário
-├── popup.js        # Lógica da interface
-└── index.js        # Script principal
-```
-
-## ⚠️ Requisitos
-
-- Google Chrome
-- WhatsApp Web
-- Conexão com a internet
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](../LICENSE) para mais detalhes.
-
-## ✨ Agradecimentos
-
-- Todos os contribuidores que ajudaram no projeto
-- Comunidade open source 
+**Aproveite e divirta-se com responsabilidade! 🎭**

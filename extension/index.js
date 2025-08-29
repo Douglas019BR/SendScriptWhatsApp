@@ -1,69 +1,76 @@
 window.addEventListener('load', function() {
-    console.log("Extension loaded...")
+    console.log("Extension loaded");
 });
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {    
     if (request.action === "sendMessages") {
-        const scriptText = request.scriptText;
-        const options = request.options;
+        handleSendMessages(request.scriptText, request.options, sendResponse);
+    }
+    return true;
+});
+
+async function handleSendMessages(scriptText, options, sendResponse) {
+    try {
+        const lines = processScriptText(scriptText);
+        const mainContainer = findMainContainer();
         
-        try {
-            window.InputEvent = window.Event || window.InputEvent;
-            const TIME_SEND = options.delaySend || 1000;
-            
-            const VIEW_ELEMENTS = {
-                textbox: () => {
-                    return document.querySelector(options.textareaSelector);
-                },
-                button_send: () => {
-                    return document.querySelector(options.sendButtonSelector);
-                }
-            };
+        if (!mainContainer) {
+            throw new Error(MESSAGES.ERRORS.NO_MAIN_CONTAINER);
+        }
 
-            function sendMessage(messagem) {
-                const textarea = VIEW_ELEMENTS['textbox']();
+        const textarea = findTextarea(mainContainer);
+        if (!textarea) {
+            throw new Error(MESSAGES.ERRORS.NO_TEXTAREA);
+        }
 
-                if (!textarea) {
-                    throw new Error("Elementos textarea do WhatsApp não encontrados");
-                }
+        await sendAllLines(lines, mainContainer, textarea, options);
+        sendResponse({ 
+            status: "success", 
+            message: `${lines.length} ${MESSAGES.SUCCESS.MESSAGES_SENT}` 
+        });
 
-                textarea.focus();
-                document.execCommand('insertText', false, messagem);
-                textarea.dispatchEvent(new Event('change', {bubbles: true}));
+    } catch (error) {
+        console.error("Error sending messages:", error);
+        sendResponse({ status: "error", message: error.message });
+    }
+}
 
-                setTimeout(()=>{
-                    const buttton_send = VIEW_ELEMENTS['button_send']();
-                    
-                    if (!buttton_send) {
-                        throw new Error("Elementos buttton_send do WhatsApp não encontrados");
-                    }
+async function sendAllLines(lines, mainContainer, textarea, options) {
+    const messageDelay = (options.delaySend || TIMING.MESSAGE_DELAY) * 0.7;
 
-                    buttton_send.click();
-                }, 100)
-                
-            }
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        if (!line.trim()) continue;
 
-            const lines = scriptText.split("\n");
-            let i = 0;
-            const id = setInterval(frame, TIME_SEND);
-
-            function frame() {
-                if (i >= lines.length) {
-                    clearInterval(id);
-                    sendResponse({ status: "success", message: "Mensagens enviadas com sucesso" });
-                    return;
-                }
-
-                const line = lines[i];
-                if(line.trim() != '') {
-                    sendMessage(line);
-                }
-
-                i++;
-            }
-        } catch (error) {
-            sendResponse({ status: "error", message: error.message });
+        await sendSingleMessage(line, textarea, mainContainer, i + 1);
+        
+        if (i < lines.length - 1) {
+            await sleep(messageDelay);
         }
     }
-    return true; // Mantém a conexão aberta para respostas assíncronas
-}); 
+}
+
+async function sendSingleMessage(message, textarea, mainContainer, messageNumber) {
+    // Focus and set message
+    textarea.focus();
+    textarea.innerHTML = '';
+    textarea.innerHTML = message;
+
+    // Trigger input event
+    textarea.dispatchEvent(new InputEvent('input', {
+        bubbles: true,
+        cancelable: true,
+        inputType: 'insertText',
+        data: message
+    }));
+
+    await sleep(TIMING.INPUT_DELAY);
+
+    // Find and click send button
+    const sendButton = findSendButton(mainContainer);
+    if (!sendButton) {
+        throw new Error(`${MESSAGES.ERRORS.NO_SEND_BUTTON} ${messageNumber}`);
+    }
+
+    sendButton.click();
+}
