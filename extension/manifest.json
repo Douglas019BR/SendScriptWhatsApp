@@ -27,7 +27,8 @@
     {
       "matches": ["https://web.whatsapp.com/*"],
       "js": ["index.js"],
-      "run_at": "document_end"
+      "run_at": "document_idle",
+      "all_frames": false
     }
   ],
   "icons": {
