@@ -1,43 +1,47 @@
 # SendScriptWhatsApp
 
-Código para enviar um Script maneiro para seus amigos ou grupos do WhatsApp.
-A ideia é manter um repositório Open Source onde todos possam contribuir para fazermos uma gigantesca coleção de scripts possíveis de serem enviadas pelo Whatsapp para nossos amigos.
+Envie roteiros de filmes, letras de músicas e textos divertidos automaticamente para seus amigos no WhatsApp! 
 
-## Utilização
+Este projeto oferece duas formas de usar: uma **extensão do navegador** (mais fácil) e **scripts manuais** (para usuários avançados).
 
-Abra qualquer arquivo do diretório `scripts`
+## 🚀 Como Usar
 
-Copie todo o conteúdo (clique em raw -> ctrl+a -> ctrl+c)
+### Opção 1: Extensão do Navegador (Recomendado)
+A forma mais simples e rápida de usar o projeto.
 
+- ✅ Interface amigável
+- ✅ Não precisa mexer no console
+- ✅ Prévia dos roteiros
+- ✅ Um clique para enviar
 
- **Atalhos:**
-   - `Ctrl+A` = selecionar tudo
-   - `Ctrl+C` = copiar
+[📁 Ver instruções da extensão](./extension/README.md)
 
-No WhatsApp Web, na conversa desejada, abra o console do Browser (F12 se usar chrome, chromium, brave e derivados)
+### Opção 2: Scripts Manuais
+Para quem prefere usar o console do navegador diretamente.
 
-|  ⚠️ Aviso importante, numa atualização recente do Google Chrome, está sendo impedido que qualquer script seja colado no Console.|
-|--|
-|  ***Para contornar esse problema, o console do desenvolvedor espera receber um confirmação textual escrevendo no console: "allow pasting"***| 
-|Após isso será permitido colar e continuar a execução do script|
+- ⚡ Execução direta
+- 🔧 Mais controle técnico
+- 📝 Fácil personalização
 
+[📁 Ver instruções dos scripts](./scripts/README.md)
 
-Cole o código no console e aperte Enter
+## 📚 Roteiros Disponíveis
 
-Pronto, veja a mágica acontecer
+- 🎬 **Filmes**
+- 🎵 **Músicas**
+- 🎮 **Games**
+- 🎭 **Clássicos**
 
-## Instalação
+## 🤝 Contribuição
 
-Para utilizar o SendScriptWhatsApp, você não precisa de nenhuma instalação adicional. Basta clonar este repositório e acessar os scripts desejados.
+Quer adicionar novos roteiros? Leia o arquivo [`CONTRIBUTING.md`](./CONTRIBUTING.md) e ajude a crescer nossa coleção!
 
+## ⚠️ Aviso Importante
 
-## Plugin navegador
+- Use com responsabilidade e respeite seus amigos
+- Alguns roteiros são longos e podem incomodar
+- Teste primeiro em conversas próprias
 
-Uma extensão para Chrome que permite enviar roteiros automaticamente no 
-WhatsApp Web.
+---
 
-![send scripts](./extension/imagem/send_scritps.jpg)
-
-## Contribuição
-
-Leia o arquivo [`CONTRIBUTING.MD`](https://github.com/Douglas019BR/SendScriptWhatsApp/blob/main/CONTRIBUTING.md)
+**Divirta-se enviando roteiros épicos! 🎉**

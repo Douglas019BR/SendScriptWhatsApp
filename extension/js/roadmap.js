@@ -1,13 +1,5 @@
-function isLocalhost() {
-    return false
-}
-
 function urlRepository(filename) {
-    if (isLocalhost()) {
-        return `http://localhost:5500/extension/data/${filename}`
-    }
-
-    return `http://raw.githubusercontent.com/Dayanfreitas/SendScriptWhatsApp/refs/heads/feat/update-extension/extension/data/${filename}`
+    return `http://raw.githubusercontent.com/Douglas019BR/SendScriptWhatsApp/refs/heads/main/extension/data/${filename}`
 }
 
 async function getRoadmapInFile(filename) {
