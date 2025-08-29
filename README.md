@@ -26,11 +26,17 @@ Cole o código no console e aperte Enter
 
 Pronto, veja a mágica acontecer
 
-
 ## Instalação
 
 Para utilizar o SendScriptWhatsApp, você não precisa de nenhuma instalação adicional. Basta clonar este repositório e acessar os scripts desejados.
 
+
+## Plugin navegador
+
+Uma extensão para Chrome que permite enviar roteiros automaticamente no 
+WhatsApp Web.
+
+![send scripts](./extension/imagem/send_scritps.jpg)
 
 ## Contribuição
 
