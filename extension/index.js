@@ -16,7 +16,11 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                     return document.querySelector(options.textareaSelector);
                 },
                 button_send: () => {
-                    return document.querySelector(options.sendButtonSelector);
+                    for (const selector of options.sendButtonSelectors) {
+                        const button = document.querySelector(selector);
+                        if (button) return button;
+                    }
+                    return null;
                 }
             };
 

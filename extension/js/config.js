@@ -26,10 +26,8 @@ const roadmap = {
     'MusicasPontePreta.txt': 'MusicasPontePreta.txt',
     'oPaiIOSendScript.txt': 'oPaiIOSendScript.txt',
     'shrek.txt': 'shrek.txt',
-    'shrekSendScript.txt': 'shrekSendScript.txt',
     'superMarioBros.txt': 'superMarioBros.txt',
     'terminator2.txt': 'terminator2.txt',
-    'terminator2SendScript.txt': 'terminator2SendScript.txt',
     'theSuperMarioBrosSendScript.txt': 'theSuperMarioBrosSendScript.txt',
     'vidaLokaSendScript.txt': 'vidaLokaSendScript.txt'
 }
@@ -48,7 +46,15 @@ const roadmap = {
  */
 const Configuration = {
 	delaySend: 500,
-	sendButtonSelector: `[aria-label="Enviar"]`,
+	sendButtonSelectors: [
+		`[data-testid="send"]`,
+		`[data-icon="send"]`,
+		`[aria-label="Send"]`,
+		`[aria-label="Enviar"]`,
+		`[data-icon="wds-ic-send-filled"]`,
+		`button[aria-label="Send"]`,
+		`button[aria-label="Enviar"]`
+	],
 	mainSelector: "#main",
 	textareaSelector: "#main div[contenteditable='true']",
 	roadmap: roadmap
