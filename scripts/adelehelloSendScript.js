@@ -24,6 +24,7 @@ async function enviarScript(scriptText){
 	
 		const sendButton = main.querySelector(`[data-testid="send"]`) || 
 						   main.querySelector(`[data-icon="send"]`) ||
+						   main.querySelector(`[data-icon="wds-ic-send-filled"]`)?.closest('[role="button"]') ||
 						   main.querySelector('button[aria-label*="Send"]') ||
 						   main.querySelector('span[data-icon="send"]').parentElement;
 		
