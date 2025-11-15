@@ -10,6 +10,7 @@ const WHATSAPP_SELECTORS = {
     
     SEND_BUTTON: '[data-testid="send"]',
     SEND_BUTTON_ICON: '[data-icon="send"]',
+    SEND_BUTTON_NEW: '[data-icon="wds-ic-send-filled"]',
     SEND_BUTTON_EN: 'button[aria-label*="Send"]',
     SEND_BUTTON_PT: 'button[aria-label*="Enviar"]'
 };

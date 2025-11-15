@@ -14,6 +14,7 @@ function findTextarea(mainContainer) {
 function findSendButton(mainContainer) {
     return mainContainer.querySelector(WHATSAPP_SELECTORS.SEND_BUTTON) || 
            mainContainer.querySelector(WHATSAPP_SELECTORS.SEND_BUTTON_ICON) ||
+           mainContainer.querySelector(WHATSAPP_SELECTORS.SEND_BUTTON_NEW)?.closest('[role="button"]') ||
            mainContainer.querySelector(WHATSAPP_SELECTORS.SEND_BUTTON_EN) ||
            mainContainer.querySelector(WHATSAPP_SELECTORS.SEND_BUTTON_PT) ||
            mainContainer.querySelector('span[data-icon="send"]')?.parentElement;
