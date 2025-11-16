@@ -1,8 +1,8 @@
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     console.log("Extension loaded");
 });
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {    
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.action === "sendMessages") {
         handleSendMessages(request.scriptText, request.options, sendResponse);
     }
@@ -13,7 +13,7 @@ async function handleSendMessages(scriptText, options, sendResponse) {
     try {
         const lines = processScriptText(scriptText);
         const mainContainer = findMainContainer();
-        
+
         if (!mainContainer) {
             throw new Error(MESSAGES.ERRORS.NO_MAIN_CONTAINER);
         }
@@ -24,9 +24,9 @@ async function handleSendMessages(scriptText, options, sendResponse) {
         }
 
         await sendAllLines(lines, mainContainer, textarea, options);
-        sendResponse({ 
-            status: "success", 
-            message: `${lines.length} ${MESSAGES.SUCCESS.MESSAGES_SENT}` 
+        sendResponse({
+            status: "success",
+            message: `${lines.length} ${MESSAGES.SUCCESS.MESSAGES_SENT}`
         });
 
     } catch (error) {
@@ -43,7 +43,7 @@ async function sendAllLines(lines, mainContainer, textarea, options) {
         if (!line.trim()) continue;
 
         await sendSingleMessage(line, textarea, mainContainer, i + 1);
-        
+
         if (i < lines.length - 1) {
             await sleep(messageDelay);
         }

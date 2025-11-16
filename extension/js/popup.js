@@ -21,7 +21,7 @@ function setupEventListeners(elements) {
 
 function loadAvailableScripts(selectElement) {
     selectElement.innerHTML = '<option value="">Selecione um roteiro</option>';
-    
+
     Object.entries(roadmap).forEach(([filename, displayName]) => {
         const option = document.createElement('option');
         option.value = filename;
@@ -32,7 +32,7 @@ function loadAvailableScripts(selectElement) {
 
 async function showPreview(elements) {
     const { roteiroSelect, preview } = elements;
-    
+
     if (!roteiroSelect.value) {
         preview.innerHTML = `<p>${MESSAGES.UI.SELECT_SCRIPT}</p>`;
         return;
@@ -44,7 +44,7 @@ async function showPreview(elements) {
         const previewText = previewLines
             .map((line, index) => `${index + 1}. ${line}`)
             .join("\n");
-        
+
         preview.textContent = previewText + "\n...";
     } catch (error) {
         preview.textContent = MESSAGES.UI.PREVIEW_ERROR + error.message;
@@ -53,7 +53,7 @@ async function showPreview(elements) {
 
 async function sendScript(elements) {
     const { roteiroSelect, enviarBtn } = elements;
-    
+
     if (!roteiroSelect.value) {
         alert(MESSAGES.ERRORS.NO_SCRIPT_SELECTED);
         return;
@@ -61,12 +61,12 @@ async function sendScript(elements) {
 
     try {
         setButtonState(enviarBtn, true);
-        
+
         const scriptContent = await getRoadmapInFile(roteiroSelect.value);
         const activeTab = await getActiveTab();
-        
+
         validateWhatsAppTab(activeTab);
-        
+
         await sendMessagesToTab(activeTab.id, scriptContent);
         alert(MESSAGES.SUCCESS.SCRIPT_SENT);
 
@@ -80,7 +80,7 @@ async function sendScript(elements) {
 
 function setButtonState(button, isLoading) {
     button.disabled = isLoading;
-    
+
     if (isLoading) {
         button.textContent = MESSAGES.UI.SENDING;
     } else {
@@ -94,7 +94,7 @@ function setButtonState(button, isLoading) {
 }
 
 async function getActiveTab() {
-    const [tab] = await chrome.tabs.query({active: true, currentWindow: true});
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     return tab;
 }
 
@@ -120,7 +120,7 @@ async function sendMessagesToTab(tabId, scriptContent) {
         if (error.message.includes(MESSAGES.ERRORS.CONNECTION_FAILED)) {
             await injectContentScript(tabId);
             await sleep(TIMING.SCRIPT_INJECTION_WAIT);
-            
+
             const response = await chrome.tabs.sendMessage(tabId, {
                 action: "sendMessages",
                 scriptText: scriptContent,

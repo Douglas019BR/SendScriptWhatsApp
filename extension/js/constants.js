@@ -2,12 +2,12 @@
 const WHATSAPP_SELECTORS = {
     MAIN_CONTAINER: "#main",
     MAIN_CONTAINER_ALT: '[data-testid="conversation-panel-body"]',
-    
+
     TEXTAREA: 'div[contenteditable="true"]',
     TEXTAREA_ALT: '[data-testid="message-composer"]',
     TEXTAREA_ROLE: '[role="textbox"]',
     TEXTAREA_SPELLCHECK: 'div[spellcheck="true"]',
-    
+
     SEND_BUTTON: '[data-testid="send"]',
     SEND_BUTTON_ICON: '[data-icon="send"]',
     SEND_BUTTON_NEW: '[data-icon="wds-ic-send-filled"]',
