@@ -1,18 +1,18 @@
-async function enviarScript(scriptText){
+async function enviarScript(scriptText) {
 	const lines = scriptText.split(/[\n\t]+/).map(line => line.trim()).filter(line => line);
 	const main = document.querySelector("#main") || document.querySelector('[data-testid="conversation-panel-body"]');
-	const textarea = main.querySelector(`div[contenteditable="true"]`) || 
-					 main.querySelector('[data-testid="message-composer"]') ||
-					 main.querySelector('[role="textbox"]') ||
-					 main.querySelector('div[spellcheck="true"]');
-	
-	if(!textarea) throw new Error("Não há uma conversa aberta")
-	
-	for(const line of lines){
+	const textarea = main.querySelector(`div[contenteditable="true"]`) ||
+		main.querySelector('[data-testid="message-composer"]') ||
+		main.querySelector('[role="textbox"]') ||
+		main.querySelector('div[spellcheck="true"]');
+
+	if (!textarea) throw new Error("Não há uma conversa aberta")
+
+	for (const line of lines) {
 		textarea.focus();
 		textarea.innerHTML = '';
 		textarea.innerHTML = line;
-		
+
 		textarea.dispatchEvent(new InputEvent('input', {
 			bubbles: true,
 			cancelable: true,
@@ -21,23 +21,24 @@ async function enviarScript(scriptText){
 		}));
 
 		await new Promise(resolve => setTimeout(resolve, 50));
-	
-		const sendButton = main.querySelector(`[data-testid="send"]`) || 
-						   main.querySelector(`[data-icon="send"]`) ||
-						   main.querySelector('button[aria-label*="Send"]') ||
-						   main.querySelector('span[data-icon="send"]').parentElement;
-		
-		if(sendButton) {
+
+		const sendButton = main.querySelector(`[data-testid="send"]`) ||
+			main.querySelector(`[data-icon="send"]`) ||
+			main.querySelector(`[data-icon="wds-ic-send-filled"]`)?.closest('[role="button"]') ||
+			main.querySelector('button[aria-label*="Send"]') ||
+			main.querySelector('span[data-icon="send"]').parentElement;
+
+		if (sendButton) {
 			setTimeout(() => {
 				sendButton.click();
 			}, 100);
 		} else {
 			console.warn("Send button not found for line:", line);
 		}
-		
-		if(lines.indexOf(line) !== lines.length - 1) await new Promise(resolve => setTimeout(resolve, 250));
+
+		if (lines.indexOf(line) !== lines.length - 1) await new Promise(resolve => setTimeout(resolve, 250));
 	}
-	
+
 	return lines.length;
 }
 enviarScript(`
